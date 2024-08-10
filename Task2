@@ -1,0 +1,86 @@
+/*Develop a Java program to track and manage student grades. The
+program should allow the user to input grades for different subjects or
+assignments, calculate the average grade, and display the overall
+grade along with any additional information (such as letter grade or GPA*/
+
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class StudentGradesManager {
+    // Method to calculate the average grade
+    public static double calculateAverage(ArrayList<Double> grades) {
+        double sum = 0;
+        for (double grade : grades) {
+            sum += grade;
+        }
+        return sum / grades.size();
+    }
+
+    // Method to determine the letter grade
+    public static String getLetterGrade(double average) {
+        if (average >= 90) {
+            return "A";
+        } else if (average >= 80) {
+            return "B";
+        } else if (average >= 70) {
+            return "C";
+        } else if (average >= 60) {
+            return "D";
+        } else {
+            return "F";
+        }
+    }
+
+    // Method to calculate GPA based on letter grade
+    public static double calculateGPA(String letterGrade) {
+        switch (letterGrade) {
+            case "A":
+                return 4.0;
+            case "B":
+                return 3.0;
+            case "C":
+                return 2.0;
+            case "D":
+                return 1.0;
+            case "F":
+                return 0.0;
+            default:
+                return 0.0;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Double> grades = new ArrayList<>();
+
+        // Input grades for different subjects
+        System.out.println("Enter grades for different subjects (type -1 to finish):");
+        while (true) {
+            System.out.print("Enter grade: ");
+            double grade = scanner.nextDouble();
+            if (grade == -1) {
+                break;
+            }
+            grades.add(grade);
+        }
+
+        // Calculate the average grade
+        double average = calculateAverage(grades);
+
+        // Determine the letter grade
+        String letterGrade = getLetterGrade(average);
+
+        // Calculate the GPA
+        double gpa = calculateGPA(letterGrade);
+
+        // Display the results
+        System.out.println("Average Grade: " + average);
+        System.out.println("Letter Grade: " + letterGrade);
+        System.out.println("GPA: " + gpa);
+
+        // Close the scanner
+        scanner.close();
+    }
+}
+
